@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGD101 Canvas Element</title>
+</head>
+<body>
+  <canvas id="canvasGlowing" width="800" height="800"></canvas>
+  <script>
+  const canvas = document.getElementById('canvasGlowing');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = "rgba(0,0,0,0.1)";
+  ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+  var ctxX = (ctx.canvas.width-200) * Math.random();
+  var ctxY = ((ctx.canvas.height-200) * Math.random()) +75;
+
+  function draw() {
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.moveTo(ctxX,ctxY);
+    ctx.lineTo(ctxX+100,ctxY+100);
+    ctx.lineTo(ctxX+200,ctxY);
+    ctx.bezierCurveTo(ctxX+200,ctxY-75,ctxX+100,ctxY-75,ctxX+100,ctxY);
+    ctx.bezierCurveTo(ctxX+100,ctxY-75,ctxX,ctxY-75,ctxX,ctxY);
+    ctx.fillStyle ="rgba(255,0,0,0.9)";
+    ctx.fill();
+
+    ctxX = (ctx.canvas.width-200) * Math.random();
+    ctxY = ((ctx.canvas.height-200) * Math.random()) +75;
+  }
+
+  function blank() {
+  ctx.fillStyle = 'rgba(0,0,0,0.1)';
+  ctx.fillRect(0, 0, ctx.canvas.width,
+       ctx.canvas.height);
+  }
+  setInterval(draw, 100);
+  setInterval(blank,80);
+  </script>
+</body>
+</html>
